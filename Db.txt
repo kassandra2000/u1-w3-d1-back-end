@@ -1,0 +1,55 @@
+esercizio 1
+SELECT * FROM customers
+WHERE name='Mario'
+------------------------------------------
+esercizio 2
+SELECT name,surname FROM customers
+WHERE year_of_birth=1982
+------------------------------------------
+esercizio 3
+SELECT invoicenumber FROM invoices
+WHERE iva=20
+------------------------------------------
+esercizio 4
+SELECT * FROM products
+WHERE  EXTRACT(YEAR FROM activation_date) = 2017
+AND (in_production=TRUE OR on_market=TRUE);
+------------------------------------------
+esercizio 5
+SELECT * FROM invoices
+JOIN customers USING (customer_id)
+WHERE amount <1000
+------------------------------------------
+esercizio 6
+SELECT denomination, invoicenumber, amount, iva ,invoice_date FROM invoices
+JOIN suppliers USING (supplier_number)
+------------------------------------------
+esercizio 7
+SELECT EXTRACT(YEAR FROM invoice_date), COUNT(*) FROM invoices
+WHERE iva='20'
+GROUP BY EXTRACT(YEAR FROM invoice_date)
+------------------------------------------
+esercizio 8
+SELECT EXTRACT(YEAR FROM invoice_date), COUNT(*), SUM(amount) FROM invoices
+WHERE iva='20'
+GROUP BY EXTRACT(YEAR FROM invoice_date)
+------------------------------------------
+extra 1
+SELECT EXTRACT(YEAR FROM invoice_date),COUNT(*) FROM invoices
+WHERE type='A'
+GROUP BY EXTRACT(YEAR FROM invoice_date)
+HAVING COUNT(*)>2
+------------------------------------------
+extra 2
+SELECT COUNT(invoicenumber),SUM(amount), region  FROM invoices
+JOIN customers USING(customer_id)
+GROUP BY region
+------------------------------------------
+extra 3
+SELECT COUNT(DISTINCT customer_id) FROM invoices
+JOIN customers USING(customer_id)
+WHERE year_of_birth=1980 AND amount>50
+
+
+
+
